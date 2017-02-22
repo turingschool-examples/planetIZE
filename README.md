@@ -1,6 +1,20 @@
+## Data Visualizations
+
+Data visualization is all about telling a story with numbers. Charts and graphs often do a better job of showing a specific result or outcome than 10,000 words. The key to good data visualization is understanding what type of chart or graph best showcases the data, smart labels for quickly understanding each axis and datapoint and animations that give the user extra information.
+
+Take 10 minutes and read the following on when to use what graph or chart:
+
+[Which Chart?](http://www.tableau.com/sites/default/files/media/which_chart_v6_final_0.pdf)
+
+The next step is knowing what Javascript tool to use to implement your visualizations. There are a lot of different libraries out there, some incredibly complex and capable of anything (D3), some work better on frameworks than others (Victory for React), some allow for user interactions such as drag-n-drop (ECharts).
+
+[Chart.js](http://www.chartjs.org/docs/) is one of my favorite tools for data visualization because it's canvas based, super easy to implement, has some cool animation features and lots of customization, and has a lot of different types of graphs. I don't need hours of config, just require it and give it labels, an array of data, and options (if you want.)
+
 ## PlanetIZE
 
-App to play around with all known planet data. Can download the latest Nasa Exoplanet data at [NASA Exoplanet Archive](http://exoplanetarchive.ipac.caltech.edu/) and insert into /data.
+App to play around with all known planet data. You can download the latest Nasa Exoplanet data at [NASA Exoplanet Archive](http://exoplanetarchive.ipac.caltech.edu/) and insert into /data. Just be sure to delete the comment lines at the top of the csv that describe each column. The first row should be the data headers.
+
+To get started, clone down and ...
 
 ```js
 $ npm install
@@ -10,17 +24,16 @@ $ webpack
 $ npm start
 ```
 
-Data visualization is all about telling a story with numbers.
-
-Each planet has the following data (many of the planets have an empty string for some of the data points because it can't or hasn't been measured yet.)
-
 The end goal of this exercise is to complete one of the below:
 
-* Build three interesting graphs. Each graph should be a different type and tell a unique story.
+* Build a chart that shows the progression in number of planets discovered each year.
+* Use the Galactic Longitude and Galactic Latitude of each planet to build a Galactic map of all planets.
+* Build a radar chart with Equilibrium Temperature to show the range of temps of each planet. Filter out any planet that doesn't have a measured Equilibrium Temperature.
 * Build a graph that shows the probability of life for each planet. You will have to scan through the data and figure out an algorithm that makes sense. Be ready to defend your algorithm.
 
 
-### Data for each Planet
+### Data for each planet
+Each planet has the following data points. Many of the planets have an empty string for some of the data points because it can't or hasn't been measured yet.
 
 * COLUMN pl_hostname:    Host Name
 * COLUMN pl_letter:      Planet Letter
