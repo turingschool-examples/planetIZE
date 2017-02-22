@@ -37706,12 +37706,13 @@ var $ = __webpack_require__(110);
 var Chart = __webpack_require__(109);
 var planetCtx = $("#planetChart");
 var discoveryCtx = $("#discoveryChart");
+var lifeCtx = $("#lifeChart");
 
 $.getJSON("/api/planets", function (data) {
   var planets = data.slice(1, -1);
 
   var planetNames = planets.map(function (planet) {
-    return planet.pl_hostname;
+    return planet.pl_hostname + ' ' + planet.pl_letter;
   });
 
   var planetDistance = planets.map(function (planet) {
@@ -37724,6 +37725,18 @@ $.getJSON("/api/planets", function (data) {
 
   var planetRadius = planets.map(function (planet) {
     return parseInt(planet.pl_radj);
+  });
+
+  var lifeRating = planets.map(function (planet) {
+    if (planet.pl_radj !== '' && planet.pl_orbper !== '' && planet.st_radv !== '') {
+      return parseInt(planet.pl_radj) + parseInt(planet.pl_orbper) / 365 + parseInt(planet.st_radv);
+    }
+  });
+
+  var lifePlanetNames = planets.map(function (planet) {
+    if (planet.pl_radj !== '' && planet.pl_orbper !== '' && planet.st_radv !== '') {
+      return planet.pl_hostname + ' ' + planet.pl_letter;
+    }
   });
 
   var discoveryMethod = {};
@@ -37769,6 +37782,17 @@ $.getJSON("/api/planets", function (data) {
     }]
   };
 
+  var lifeData = {
+    labels: planetNames,
+    datasets: [{
+      label: 'Probability of Life',
+      data: lifeRating,
+      backgroundColor: ['rgba(5, 194, 209, 0.2)'],
+      borderColor: ['rgba(5, 194, 209, 1)'],
+      borderWidth: 1
+    }]
+  };
+
   var planetChart = new Chart(planetCtx, {
     type: 'line',
     data: planetData
@@ -37777,6 +37801,11 @@ $.getJSON("/api/planets", function (data) {
   var discoveryChart = new Chart(discoveryCtx, {
     type: 'pie',
     data: discoveryData
+  });
+
+  var lifeChart = new Chart(lifeCtx, {
+    type: 'line',
+    data: lifeData
   });
 });
 

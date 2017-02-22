@@ -1,4 +1,14 @@
-/*.canvas-container {
-  width: 500vw;
+h1,h2,h3 {
+  text-align: center;
+}
+
+.main-container {
+  width: 100vw;
   height: auto;
-}*/
+}
+
+.small-chart {
+  width: 50vw;
+  text-align: center;
+  height: auto;
+}
