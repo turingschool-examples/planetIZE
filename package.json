@@ -1,0 +1,25 @@
+{
+  "name": "planet_data",
+  "version": "1.0.0",
+  "description": "Planet data visualizations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Tideman",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "chart.js": "^2.5.0",
+    "express": "^4.14.1",
+    "jquery": "^3.1.1",
+    "moment": "^2.17.1"
+  },
+  "devdependcies": {
+    "babel-core": "^6.9.0",
+    "babel-loader": "^6.2.8",
+    "babel-preset-latest": "^6.22.0",
+    "nodemon": "^1.9.2"
+  }
+}
