@@ -37708,76 +37708,76 @@ var planetCtx = $("#planetChart");
 var discoveryCtx = $("#discoveryChart");
 
 $.getJSON("/api/planets", function (data) {
-    var planets = data.slice(1, -1);
+  var planets = data.slice(1, -1);
 
-    var planetNames = planets.map(function (planet) {
-        return planet.pl_hostname;
-    });
+  var planetNames = planets.map(function (planet) {
+    return planet.pl_hostname;
+  });
 
-    var planetDistance = planets.map(function (planet) {
-        return parseInt(planet.st_dist);
-    });
+  var planetDistance = planets.map(function (planet) {
+    return parseInt(planet.st_dist);
+  });
 
-    var planetDensity = planets.map(function (planet) {
-        return parseInt(planet.pl_dens);
-    });
+  var planetDensity = planets.map(function (planet) {
+    return parseInt(planet.pl_dens);
+  });
 
-    var planetRadius = planets.map(function (planet) {
-        return parseInt(planet.pl_radj);
-    });
+  var planetRadius = planets.map(function (planet) {
+    return parseInt(planet.pl_radj);
+  });
 
-    var discoveryMethod = {};
-    var findDiscoveryMethods = planets.map(function (planet) {
-        if (discoveryMethod[planet.pl_discmethod]) {
-            discoveryMethod[planet.pl_discmethod] += 1;
-        } else {
-            discoveryMethod[planet.pl_discmethod] = 1;
-        }
-    });
+  var discoveryMethod = {};
+  var findDiscoveryMethods = planets.map(function (planet) {
+    if (discoveryMethod[planet.pl_discmethod]) {
+      discoveryMethod[planet.pl_discmethod] += 1;
+    } else {
+      discoveryMethod[planet.pl_discmethod] = 1;
+    }
+  });
 
-    var planetData = {
-        labels: planetNames,
-        datasets: [{
-            label: 'Planet Distance from Earth',
-            data: planetDistance,
-            backgroundColor: ['rgba(5, 194, 209, 0.2)'],
-            borderColor: ['rgba(5, 194, 209, 1)'],
-            borderWidth: 1
-        }, {
-            label: 'Planet Density',
-            data: planetDensity,
-            backgroundColor: ['rgba(51, 153, 34, 0.2)'],
-            borderColor: ['rgba(51, 153, 34, 0.1)'],
-            borderWidth: 1
-        }, {
-            label: 'Planet Radius',
-            data: planetRadius,
-            backgroundColor: ['rgba(17, 17, 17, 0.2)'],
-            borderColor: ['rgba(17, 17, 17, 0.1)'],
-            borderWidth: 1
-        }]
-    };
+  var planetData = {
+    labels: planetNames,
+    datasets: [{
+      label: 'Planet Distance from Earth',
+      data: planetDistance,
+      backgroundColor: ['rgba(5, 194, 209, 0.2)'],
+      borderColor: ['rgba(5, 194, 209, 1)'],
+      borderWidth: 1
+    }, {
+      label: 'Planet Density',
+      data: planetDensity,
+      backgroundColor: ['rgba(51, 153, 34, 0.2)'],
+      borderColor: ['rgba(51, 153, 34, 0.1)'],
+      borderWidth: 1
+    }, {
+      label: 'Planet Radius',
+      data: planetRadius,
+      backgroundColor: ['rgba(17, 17, 17, 0.2)'],
+      borderColor: ['rgba(17, 17, 17, 0.1)'],
+      borderWidth: 1
+    }]
+  };
 
-    var discoveryData = {
-        labels: Object.keys(discoveryMethod),
-        datasets: [{
-            label: 'Planet Discovery',
-            data: Object.values(discoveryMethod),
-            backgroundColor: ['rgba(5, 194, 209, 0.2)'],
-            borderColor: ['rgba(5, 194, 209, 1)'],
-            borderWidth: 1
-        }]
-    };
+  var discoveryData = {
+    labels: Object.keys(discoveryMethod),
+    datasets: [{
+      label: 'Planet Discovery',
+      data: Object.values(discoveryMethod),
+      backgroundColor: ['rgba(5, 194, 209, 0.2)', 'rgba(204, 85, 85, 0.2)', 'rgba(26, 26, 26, 0.2)', 'rgba(90, 23, 237, 0.2)', 'rgba(5, 194, 209, 0.2)', 'rgba(204, 85, 85, 0.2)', 'rgba(26, 26, 26, 0.2)', 'rgba(90, 23, 237, 0.2)', 'rgba(134, 65, 83, 0.2)', 'rgba(242, 200, 132, 0.2)', 'rgba(242, 165, 0, 0.2)'],
+      borderColor: ['rgba(5, 194, 209, 1)', 'rgba(204, 85, 85, 1)', 'rgba(26, 26, 26, 1)', 'rgba(90, 23, 237, 1)', 'rgba(5, 194, 209, 1)', 'rgba(204, 85, 85, 1)', 'rgba(26, 26, 26, 1)', 'rgba(90, 23, 237, 1)', 'rgba(134, 65, 83, 1)', 'rgba(242, 200, 132, 1)', 'rgba(242, 165, 0, 1)'],
+      borderWidth: 1
+    }]
+  };
 
-    var planetChart = new Chart(planetCtx, {
-        type: 'line',
-        data: planetData
-    });
+  var planetChart = new Chart(planetCtx, {
+    type: 'line',
+    data: planetData
+  });
 
-    var discoveryChart = new Chart(discoveryCtx, {
-        type: 'pie',
-        data: discoveryData
-    });
+  var discoveryChart = new Chart(discoveryCtx, {
+    type: 'pie',
+    data: discoveryData
+  });
 });
 
 /***/ })
