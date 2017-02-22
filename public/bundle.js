@@ -37707,25 +37707,29 @@ var Chart = __webpack_require__(109);
 var planetCtx = $("#planetChart");
 
 $.getJSON("/api/planets", function (data) {
-    var planetRadius = data.map(function (planet) {
-        return parseInt(planet.pl_radj);
-    });
+  var planetRadius = data.map(function (planet) {
+    return parseInt(planet.pl_radj);
+  });
 
-    var planetData = {
-        labels: ["One Graduate Hired", "Two Graduates Hired", "Three + Graduates Hired"],
-        datasets: [{
-            label: 'Turing Demographics',
-            data: planetRadius,
-            backgroundColor: ['rgba(5, 194, 209, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 100, 0.2)'],
-            borderColor: ['rgba(5, 194, 209, 1)', 'rgba(75, 192, 192, 1)', 'rgba(255,99,100,1)'],
-            borderWidth: 1
-        }]
-    };
+  var planetNames = data.map(function (planet) {
+    return planet.pl_hostname;
+  });
 
-    var planetChart = new Chart(planetCtx, {
-        type: 'pie',
-        data: planetData
-    });
+  var planetData = {
+    labels: planetNames,
+    datasets: [{
+      label: '',
+      data: planetRadius,
+      backgroundColor: ['rgba(5, 194, 209, 0.2)'],
+      borderColor: ['rgba(5, 194, 209, 1)'],
+      borderWidth: 1
+    }]
+  };
+
+  var planetChart = new Chart(planetCtx, {
+    type: 'line',
+    data: planetData
+  });
 });
 
 /***/ })
