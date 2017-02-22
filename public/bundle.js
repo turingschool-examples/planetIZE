@@ -37706,30 +37706,51 @@ var $ = __webpack_require__(110);
 var Chart = __webpack_require__(109);
 var planetCtx = $("#planetChart");
 
-$.getJSON("/api/planets", function (data) {
-  var planetRadius = data.map(function (planet) {
-    return parseInt(planet.pl_radj);
-  });
+$.getJSON("/api/planets", function (planets) {
 
-  var planetNames = data.map(function (planet) {
-    return planet.pl_hostname;
-  });
+    var planetNames = planets.map(function (planet) {
+        return planet.pl_hostname;
+    });
 
-  var planetData = {
-    labels: planetNames,
-    datasets: [{
-      label: '',
-      data: planetRadius,
-      backgroundColor: ['rgba(5, 194, 209, 0.2)'],
-      borderColor: ['rgba(5, 194, 209, 1)'],
-      borderWidth: 1
-    }]
-  };
+    var planetDistance = planets.map(function (planet) {
+        return parseInt(planet.st_dist);
+    });
 
-  var planetChart = new Chart(planetCtx, {
-    type: 'line',
-    data: planetData
-  });
+    var planetDensity = planets.map(function (planet) {
+        return parseInt(planet.pl_dens);
+    });
+
+    var planetRadius = planets.map(function (planet) {
+        return parseInt(planet.pl_radj);
+    });
+
+    var planetData = {
+        labels: planetNames,
+        datasets: [{
+            label: 'Planet Distance from Earth',
+            data: planetDistance,
+            backgroundColor: ['rgba(5, 194, 209, 0.2)'],
+            borderColor: ['rgba(5, 194, 209, 1)'],
+            borderWidth: 1
+        }, {
+            label: 'Planet Density',
+            data: planetDensity,
+            backgroundColor: ['rgba(51, 153, 34, 0.2)'],
+            borderColor: ['rgba(51, 153, 34, 0.1)'],
+            borderWidth: 1
+        }, {
+            label: 'Planet Radius',
+            data: planetRadius,
+            backgroundColor: ['rgba(17, 17, 17, 0.2)'],
+            borderColor: ['rgba(17, 17, 17, 0.1)'],
+            borderWidth: 1
+        }]
+    };
+
+    var planetChart = new Chart(planetCtx, {
+        type: 'bar',
+        data: planetData
+    });
 });
 
 /***/ })
