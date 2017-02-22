@@ -37705,6 +37705,7 @@ module.exports = function(module) {
 var $ = __webpack_require__(110);
 var Chart = __webpack_require__(109);
 var planetCtx = $("#planetChart");
+var discoveryCtx = $("#discoveryChart");
 
 $.getJSON("/api/planets", function (planets) {
 
@@ -37722,6 +37723,15 @@ $.getJSON("/api/planets", function (planets) {
 
     var planetRadius = planets.map(function (planet) {
         return parseInt(planet.pl_radj);
+    });
+
+    var discoveryMethod = {};
+    var findDiscoveryMethods = planets.map(function (planet) {
+        if (discoveryMethod[planet.pl_discmethod]) {
+            discoveryMethod[planet.pl_discmethod] += 1;
+        } else {
+            discoveryMethod[planet.pl_discmethod] = 1;
+        }
     });
 
     var planetData = {
@@ -37747,9 +37757,25 @@ $.getJSON("/api/planets", function (planets) {
         }]
     };
 
+    var discoveryData = {
+        labels: Object.keys(discoveryMethod).slice(1, -1),
+        datasets: [{
+            label: 'Planet Discovery',
+            data: Object.values(discoveryMethod).slice(1, -1),
+            backgroundColor: ['rgba(5, 194, 209, 0.2)'],
+            borderColor: ['rgba(5, 194, 209, 1)'],
+            borderWidth: 1
+        }]
+    };
+
     var planetChart = new Chart(planetCtx, {
         type: 'line',
         data: planetData
+    });
+
+    var discoveryChart = new Chart(discoveryCtx, {
+        type: 'pie',
+        data: discoveryData
     });
 });
 
