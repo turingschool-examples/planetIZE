@@ -1,7 +1,7 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const fs = require('fs');
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const fs = require('fs')
 const planetData = require('./lib/index.js')
 
 app.use(express.static('public'));
