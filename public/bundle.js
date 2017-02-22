@@ -37707,7 +37707,8 @@ var Chart = __webpack_require__(109);
 var planetCtx = $("#planetChart");
 var discoveryCtx = $("#discoveryChart");
 
-$.getJSON("/api/planets", function (planets) {
+$.getJSON("/api/planets", function (data) {
+    var planets = data.slice(1, -1);
 
     var planetNames = planets.map(function (planet) {
         return planet.pl_hostname;
@@ -37758,10 +37759,10 @@ $.getJSON("/api/planets", function (planets) {
     };
 
     var discoveryData = {
-        labels: Object.keys(discoveryMethod).slice(1, -1),
+        labels: Object.keys(discoveryMethod),
         datasets: [{
             label: 'Planet Discovery',
-            data: Object.values(discoveryMethod).slice(1, -1),
+            data: Object.values(discoveryMethod),
             backgroundColor: ['rgba(5, 194, 209, 0.2)'],
             borderColor: ['rgba(5, 194, 209, 1)'],
             borderWidth: 1
