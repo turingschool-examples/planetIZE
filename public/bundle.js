@@ -37748,7 +37748,7 @@ $.getJSON("/api/planets", function (planets) {
     };
 
     var planetChart = new Chart(planetCtx, {
-        type: 'bar',
+        type: 'line',
         data: planetData
     });
 });
