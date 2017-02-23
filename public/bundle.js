@@ -37711,8 +37711,14 @@ var lifeCtx = $("#lifeChart");
 $.getJSON("/api/planets", function (data) {
   var planets = data.slice(1, -1);
 
+  var trappist1E = planets.find(function (planet) {
+    return planet.pl_name === 'TRAPPIST-1 e';
+  });
+
+  console.log("Trappist-1 e: ", trappist1E);
+
   var planetNames = planets.map(function (planet) {
-    return planet.pl_hostname + ' ' + planet.pl_letter;
+    return planet.pl_name;
   });
 
   var planetDistance = planets.map(function (planet) {
@@ -37728,18 +37734,19 @@ $.getJSON("/api/planets", function (data) {
   });
 
   var lifeRating = planets.map(function (planet) {
-    if (planet.pl_radj !== '' && planet.pl_orbper !== '' && planet.st_radv !== '') {
-      return parseInt(planet.pl_radj) + parseInt(planet.pl_orbper) / 365 + parseInt(planet.st_radv);
+    if (planet.pl_radj !== '' && planet.pl_orbper !== '' && planet.pl_bmasse !== '' && planet.pl_insol !== '') {
+      return 100 - (Math.abs(parseInt(planet.pl_radj) - parseInt(trappist1E.pl_radj)) + Math.abs(parseInt(planet.pl_orbper) - parseInt(trappist1E.pl_orbper)) + Math.abs(parseInt(planet.pl_bmasse) - parseInt(trappist1E.pl_bmasse)) + Math.abs(parseInt(planet.pl_insol) - parseInt(trappist1E.pl_insol)));
     }
   });
 
   var lifePlanetNames = planets.map(function (planet) {
-    if (planet.pl_radj !== '' && planet.pl_orbper !== '' && planet.st_radv !== '') {
-      return planet.pl_hostname + ' ' + planet.pl_letter;
+    if (planet.pl_radj !== '' && planet.pl_orbper !== '' && planet.pl_bmasse !== '' && planet.pl_insol !== '') {
+      return planet.pl_name;
     }
   });
 
   var discoveryMethod = {};
+
   var findDiscoveryMethods = planets.map(function (planet) {
     if (discoveryMethod[planet.pl_discmethod]) {
       discoveryMethod[planet.pl_discmethod] += 1;
